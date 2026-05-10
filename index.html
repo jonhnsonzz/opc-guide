@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>一人创业合规指南</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,sans-serif;background:#f0f2f5;color:#1a1a2e;padding:20px}
+.container{max-width:720px;margin:0 auto}
+.card{background:#fff;border-radius:16px;padding:28px;margin-bottom:16px;box-shadow:0 2px 12px rgba(0,0,0,0.06)}
+h1{font-size:22px;text-align:center;margin-bottom:4px}
+.sub{text-align:center;color:#888;font-size:13px;margin-bottom:20px;line-height:1.6}
+.step-tag{display:inline-block;background:#eef2ff;color:#4361ee;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:600}
+.option-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:20px}
+.option-card{border:2px solid #e0e0e0;border-radius:12px;padding:16px;text-align:center;cursor:pointer;transition:all .2s}
+.option-card:hover{border-color:#4361ee;background:#f8f9ff}
+.option-card.selected{border-color:#4361ee;background:#eef2ff}
+.option-card .icon{font-size:36px;margin-bottom:8px}
+.option-card .name{font-weight:700;font-size:14px;margin-bottom:4px}
+.option-card .desc{font-size:12px;color:#888;line-height:1.4}
+.form-group{margin-bottom:16px}
+.form-group label{display:block;font-weight:600;font-size:14px;margin-bottom:6px;color:#333}
+.form-group select,.form-group input{width:100%;padding:10px 12px;border:2px solid #e0e0e0;border-radius:10px;font-size:14px;background:#fff}
+.form-group select:focus,.form-group input:focus{outline:none;border-color:#4361ee}
+.btn{display:block;width:100%;padding:13px;background:#4361ee;color:#fff;border:none;border-radius:10px;font-size:16px;font-weight:600;cursor:pointer;text-align:center;transition:background .2s}
+.btn:hover{background:#3651d4}
+.btn.outline{background:transparent;color:#4361ee;border:2px solid #4361ee;margin-top:12px}
+.btn.outline:hover{background:#f0f3ff}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.hide{display:none}
+.step-group{margin-bottom:20px}
+.step-group:last-child{margin-bottom:0}
+.section-title{font-size:16px;font-weight:700;margin:16px 0 10px;padding-bottom:8px;border-bottom:2px solid #f0f0f0;display:flex;align-items:center;gap:6px}
+.step-item{background:#f8f9ff;border-radius:10px;padding:12px;margin-bottom:8px}
+.step-item .step-header{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.step-item .step-title{font-weight:600;font-size:14px;flex:1}
+.step-item .step-badge{font-size:12px;padding:2px 8px;border-radius:4px;white-space:nowrap}
+.step-item .step-badge.green{background:#d4edda;color:#155724}
+.step-item .step-badge.orange{background:#fff3cd;color:#856404}
+.step-item .step-detail{font-size:13px;color:#666;margin-top:6px;line-height:1.6}
+.step-item .step-materials{margin-top:6px;display:flex;flex-wrap:wrap;gap:4px}
+.step-item .step-materials span{background:#fff;border:1px solid #e0e0e0;border-radius:4px;padding:2px 6px;font-size:11px;color:#555}
+.tip-box{background:#fff;border-radius:8px;padding:10px 12px;margin-top:6px;font-size:13px;border-left:3px solid #ff9f1c;line-height:1.6}
+.extra-list{margin-top:8px}
+.extra-item{display:flex;justify-content:space-between;align-items:center;padding:8px 10px;background:#fff;border-radius:6px;margin-bottom:4px;font-size:13px}
+.extra-item .tag{display:inline-block;padding:1px 6px;border-radius:3px;font-size:11px;color:#fff}
+.extra-item .tag.red{background:#e71d36}
+.extra-item .tag.green{background:#2ec4b6}
+.extra-item .tag.orange{background:#ff9f1c}
+.disclaimer{background:#fff3cd;border-radius:8px;padding:10px 12px;font-size:12px;color:#856404;line-height:1.6;margin-top:16px}
+.footer{text-align:center;color:#aaa;font-size:12px;margin-top:24px;line-height:1.8}
+@media(max-width:480px){.option-grid{grid-template-columns:1fr}.card{padding:20px}}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Step 1: 选身份 -->
+<div class="card" id="step1">
+<h1>🧭 一人创业合规指南</h1>
+<p class="sub">先选你的身份，系统自动生成合规清单</p>
+<div class="option-grid">
+<div class="option-card" onclick="pick(0)" id="opt0">
+<div class="icon">🏢</div>
+<div class="name">一人有限责任公司</div>
+<div class="desc">独立法人、有限责任<br>适合有明确业务方向</div>
+</div>
+<div class="option-card" onclick="pick(1)" id="opt1">
+<div class="icon">🧑‍💼</div>
+<div class="name">个人创业者</div>
+<div class="desc">个体工商户/小规模<br>适合自由职业/小店</div>
+</div>
+<div class="option-card" onclick="pick(2)" id="opt2">
+<div class="icon">💻</div>
+<div class="name">独立开发者</div>
+<div class="desc">做网站/App/接外包<br>适合技术背景创业者</div>
+</div>
+</div>
+<button class="btn" id="nextBtn" disabled onclick="goStep2()">选择身份后继续 →</button>
+</div>
+
+<!-- Step 2: 填信息 -->
+<div class="card hide" id="step2">
+<h1>📋 补充信息</h1>
+<p class="sub">让清单更精准</p>
+<div class="form-group">
+<label>你的行业/创业方向</label>
+<select id="industry">
+<option value="电商">电商/跨境电商</option>
+<option value="软件开发">软件开发/外包</option>
+<option value="咨询服务">咨询服务/培训</option>
+<option value="内容创作">内容创作/自媒体</option>
+<option value="设计创意">设计/创意服务</option>
+<option value="餐饮零售">餐饮/零售</option>
+<option value="AI应用">AI应用/工具</option>
+<option value="SaaS产品">SaaS产品/平台</option>
+<option value="其他">其他</option>
+</select>
+</div>
+<div class="form-group">
+<label>所在地区</label>
+<select id="city">
+<option value="全国">全国通用（指导参考）</option>
+<option value="北京">北京</option>
+</select>
+</div>
+<div style="font-size:12px;color:#888;margin-bottom:16px;padding:8px 10px;background:#f8f9ff;border-radius:6px">
+💡 <strong>仅限北京地区展示详细流程</strong>，其他地区通用流程相同，具体细节建议咨询当地市场监管局。
+</div>
+<button class="btn" onclick="goStep3()">生成合规清单 →</button>
+<button class="btn outline" onclick="backStep1()">← 重新选择身份</button>
+</div>
+
+<!-- Step 3: 结果 -->
+<div class="card hide" id="step3">
+<div id="resultHeader"></div>
+<div id="resultSteps"></div>
+<div id="resultExtras"></div>
+<div id="resultCity"></div>
+<div class="disclaimer">
+⚠️ <strong>免责声明：</strong>本指南仅供初步参考，各地政策可能有差异。正式办理前请以当地市场监管局、税务局、工信局等主管部门的最新要求为准。北京地区信息基于2026年5月公开资料整理，如有变更请以官方为准。
+</div>
+<button class="btn outline" onclick="resetAll()">← 重新开始</button>
+</div>
+
+<div class="footer">仅供初步参考 · 正式办理以主管部门要求为准</div>
+</div>
+
+<script>
+const identity = [
+  {
+    name:'一人有限责任公司', icon:'🏢',
+    steps:[
+      {title:'公司核名',detail:'登录"国家企业信用信息公示系统"或当地市场监管局网站，提交3-5个备选名称进行核名。',material:['备选名称','经营范围描述'],cost:'免费',time:'1个工作日'},
+      {title:'提交注册材料',detail:'线上或线下提交注册申请。核心材料包括：身份证明、注册地址证明、公司章程、经营范围。北京可通过"北京市企业登记e窗通"全程网上办理。',material:['法人身份证','注册地址证明（房产证/租赁合同）','公司章程','经营范围表述'],cost:'免费',time:'1-3个工作日'},
+      {title:'领取营业执照',detail:'审核通过后，可选择邮寄或现场领取营业执照。北京支持电子营业执照，微信/支付宝可下载。',material:['身份证原件'],cost:'免费',time:'即时'},
+      {title:'刻章备案',detail:'凭营业执照到公安局指定刻章点刻制公章、财务章、法人章。北京部分区免费刻章（创业扶持政策）。',material:['营业执照原件','法人身份证'],cost:'0-200元',time:'1个工作日'},
+      {title:'银行开户',detail:'选择银行开立对公基本户。北京部分银行支持线上预约，需法人到场面签。',material:['营业执照正本','公章、财务章、法人章','法人身份证','公司章程'],cost:'0-500元',time:'3-7个工作日'},
+      {title:'税务登记',detail:'领取执照后30日内完成税务登记。北京通过"北京市电子税务局"在线办理，核定税种（增值税、企业所得税等）。',material:['营业执照','银行开户许可证'],cost:'免费',time:'1个工作日'},
+      {title:'社保/公积金开户',detail:'有员工后需开社保和公积金账户。北京可通过"北京市社会保险网上服务平台"和"北京住房公积金"在线办理。',material:['营业执照','法人身份证','银行账户信息'],cost:'免费',time:'1-3个工作日'}
+    ],
+    notNeed:'注意：一人公司需每年做工商年报（1月1日-6月30日），每月/每季度报税。即使没有收入也要零申报。',
+    extras:{
+      '电商':[{name:'食品经营许可证',level:'必须',note:'卖食品需办'},{name:'EDI许可证',level:'必须',note:'自营电商平台需办'},{name:'ICP备案',level:'必须',note:'网站需备案'}],
+      '软件开发':[{name:'软件著作权',level:'建议',note:'保护代码、申高新'},{name:'ICP备案',level:'必须',note:'网站需备案'}],
+      '咨询服务':[{name:'无额外资质',level:'',note:'营业执照即可'}],
+      '内容创作':[{name:'ICP备案',level:'必须',note:'网站需备案'},{name:'广播电视许可',level:'看情况',note:'做视频节目可能需办'}],
+      '设计创意':[{name:'ICP备案',level:'必须',note:'网站需备案'}],
+      '餐饮零售':[{name:'食品经营许可证',level:'必须',note:'卖食品需办'},{name:'卫生许可证',level:'必须',note:'餐饮需办'},{name:'消防验收',level:'必须',note:'实体店需办'}],
+      'AI应用':[{name:'算法备案',level:'建议',note:'AI功能需备案'},{name:'ICP备案',level:'必须',note:'网站/App需备案'}],
+      'SaaS产品':[{name:'EDI许可证',level:'必须',note:'在线交易需办'},{name:'ICP备案',level:'必须',note:'网站需备案'},{name:'等级保护',level:'建议',note:'三级等保'}],
+      '其他':[{name:'咨询当地市监局',level:'',note:'具体行业可能需额外资质'}]
+    }
+  },
+  {
+    name:'个人创业者', icon:'🧑‍💼',
+    steps:[
+      {title:'名称核准',detail:'确定个体工商户名称，到当地市场监管局核名。北京可通过"北京市企业登记e窗通"办理。',material:['备选名称','经营者身份证'],cost:'免费',time:'即时'},
+      {title:'提交开业登记',detail:'提交个体工商户开业登记申请。北京支持全程网办。',material:['经营者身份证','经营场所证明（产权证或租赁合同）','经营范围'],cost:'免费',time:'1-3个工作日'},
+      {title:'领取营业执照',detail:'审核通过后领取个体工商户营业执照。北京支持电子营业执照。',material:['身份证原件'],cost:'免费',time:'即时'},
+      {title:'税务登记',detail:'领取执照后30日内完成税务登记。个体户通常适用小规模纳税人，可申请核定征收（具体看地方政策）。',material:['营业执照','经营者身份证'],cost:'免费',time:'1个工作日'}
+    ],
+    notNeed:'注意：个体户承担无限责任。税务上可申请核定征收（月收入10万以下通常免税）。每年需做年报。',
+    extras:{
+      '电商':[{name:'食品经营许可证',level:'必须',note:'卖食品需办'},{name:'ICP备案',level:'必须',note:'网站需备案'}],
+      '软件开发':[{name:'ICP备案',level:'必须',note:'网站需备案'}],
+      '咨询服务':[{name:'无额外资质',level:'',note:'营业执照即可'}],
+      '内容创作':[{name:'ICP备案',level:'必须',note:'网站需备案'}],
+      '设计创意':[{name:'ICP备案',level:'必须',note:'网站需备案'}],
+      '餐饮零售':[{name:'食品经营许可证',level:'必须',note:'卖食品需办'},{name:'卫生许可证',level:'必须',note:'餐饮需办'}],
+      'AI应用':[{name:'算法备案',level:'建议',note:'有AI功能建议办'},{name:'ICP备案',level:'必须',note:'网站需备案'}],
+      'SaaS产品':[{name:'EDI许可证',level:'必须',note:'在线交易需办'},{name:'ICP备案',level:'必须',note:'网站需备案'}],
+      '其他':[{name:'咨询当地市监局',level:'',note:'具体行业可能需额外资质'}]
+    }
+  },
+  {
+    name:'独立开发者', icon:'💻',
+    steps:[
+      {title:'确定业务形式',detail:'<strong>做网站/App产品</strong> → 先以个人名义运营，收入到一定规模后注册公司。<br><strong>接外包/做项目</strong> → 建议注册个体户（成本低，可开票）。<br><strong>做SaaS/平台</strong> → 建议注册公司（需要EDI证等资质）。',material:['根据业务形态决定'],cost:'免费（咨询）',time:'1天'},
+      {title:'域名注册+ICP备案',detail:'做网站第一步：买域名 → 实名认证 → 服务器（国内服务器需ICP备案）。备案通过"工信部ICP/IP备案系统"办理，约20个工作日。',material:['域名证书','服务器购买证明','身份证'],cost:'域名约50元/年',time:'20个工作日'},
+      {title:'软件著作权（可选）',detail:'保护原创代码，申请高新认定、App上架可能需要。通过"中国版权保护中心"在线申请。',material:['源代码（前30页+后30页）','用户手册','营业执照/身份证'],cost:'300-1000元',time:'1-2个月'},
+      {title:'App备案（做App需办）',detail:'2023年起，在中国境内分发App需备案。通过"App备案系统"办理。',material:['营业执照','App说明','隐私政策'],cost:'免费',time:'10个工作日'},
+      {title:'税务登记',detail:'如果注册了个体户或公司：30日内完成税务登记。如果以个人名义接单：年度汇算清缴（劳务报酬收入）。',material:['营业执照','身份证'],cost:'免费',time:'1个工作日'},
+      {title:'海外业务（可选）',detail:'做海外市场/收美元：可注册海外公司（美国LLC、香港公司等）。注意外汇管制和税务申报。',material:['护照','地址证明','经营范围'],cost:'2000-5000元',time:'1-2周'}
+    ],
+    notNeed:'建议：起步阶段先用个人名义做，等有稳定收入了再注册公司。独立开发者最大的合规坑是：网站没ICP备案被关停、App没备案被下架、接私活没交税被查。',
+    extras:{
+      '电商':[{name:'EDI许可证',level:'必须',note:'自营电商平台需办'},{name:'食品经营许可证',level:'必须',note:'卖食品需办'}],
+      '软件开发':[{name:'软件著作权',level:'建议',note:'保护代码'},{name:'ICP备案',level:'必须',note:'网站需备案'}],
+      '咨询服务':[{name:'ICP备案',level:'必须',note:'网站需备案'}],
+      '内容创作':[{name:'广播电视许可',level:'看情况',note:'做视频节目可能需办'}],
+      '设计创意':[{name:'ICP备案',level:'必须',note:'网站需备案'}],
+      '餐饮零售':[{name:'食品经营许可证',level:'必须',note:'卖食品需办'}],
+      'AI应用':[{name:'算法备案',level:'建议',note:'AI功能需备案'},{name:'ICP备案',level:'必须',note:'网站/App需备案'}],
+      'SaaS产品':[{name:'EDI许可证',level:'必须',note:'在线交易需办'},{name:'ICP备案',level:'必须',note:'网站需备案'}],
+      '其他':[{name:'咨询当地市监局',level:'',note:'具体行业可能需额外资质'}]
+    }
+  }
+];
+
+let selected = -1;
+
+function pick(idx){
+  selected = idx;
+  document.querySelectorAll('.option-card').forEach((c,i)=>{
+    c.classList.toggle('selected', i===idx);
+  });
+  document.getElementById('nextBtn').disabled = false;
+}
+
+function goStep2(){
+  if(selected<0) return;
+  document.getElementById('step1').classList.add('hide');
+  document.getElementById('step2').classList.remove('hide');
+}
+
+function backStep1(){
+  document.getElementById('step2').classList.add('hide');
+  document.getElementById('step1').classList.remove('hide');
+}
+
+function goStep3(){
+  const id = identity[selected];
+  const ind = document.getElementById('industry').value;
+  const city = document.getElementById('city').value;
+  const isBj = city === '北京';
+  
+  let html = `<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><span style="font-size:28px">${id.icon}</span><span style="font-size:20px;font-weight:700">${id.name}</span></div>
+  <p class="sub" style="text-align:left;margin-bottom:12px">行业：${document.getElementById('industry').selectedOptions[0].text} · 地区：${city}</p>`;
+  
+  html += '<div class="section-title">📋 合规路径</div>';
+  let totalCost = 0, totalTime = '';
+  id.steps.forEach((s,i)=>{
+    const isFree = s.cost.includes('免费') || s.cost.includes('0元');
+    html += `<div class="step-item">
+      <div class="step-header">
+        <div><span class="step-tag">${i+1}</span> <span class="step-title">${s.title}</span></div>
+        <span class="step-badge ${isFree?'green':'orange'}">${s.cost}</span>
+      </div>
+      <div class="step-detail">${s.detail}</div>
+      <div class="step-materials">${s.material.map(m=>`<span>📄 ${m}</span>`).join('')}</div>
+      <div style="font-size:12px;color:#888;margin-top:4px">⏱ ${s.time}</div>
+    </div>`;
+  });
+  
+  html += `<div class="tip-box" style="border-left-color:#4361ee">💡 ${id.notNeed}</div>`;
+  
+  // Industry extras
+  const extras = id.extras[ind] || id.extras['其他'];
+  html += '<div class="section-title">📎 行业附加资质</div>';
+  html += '<div class="extra-list">';
+  extras.forEach(e=>{
+    const tagClass = e.level==='必须'?'red':e.level==='建议'?'orange':'green';
+    html += `<div class="extra-item"><span>${e.name} <span class="tag ${tagClass}">${e.level}</span></span><span style="font-size:12px;color:#888">${e.note}</span></div>`;
+  });
+  html += '</div>';
+  
+  // City detail
+  if(isBj){
+    html += `<div class="section-title">📍 北京地区指引</div>
+    <div class="tip-box" style="border-left-color:#2ec4b6">
+      <strong>北京注册入口：</strong><br>
+      • 北京市企业登记e窗通：<a href="https://ect.scjgj.beijing.gov.cn/" target="_blank" style="color:#4361ee">ect.scjgj.beijing.gov.cn</a><br>
+      • 北京市电子税务局：<a href="https://etax.beijing.chinatax.gov.cn/" target="_blank" style="color:#4361ee">etax.beijing.chinatax.gov.cn</a><br>
+      • ICP备案：<a href="https://beian.miit.gov.cn/" target="_blank" style="color:#4361ee">beian.miit.gov.cn</a><br>
+      <strong>北京创业扶持：</strong><br>
+      • 一次性创业补贴：毕业2年内高校毕业生首次创业可申领（具体条件咨询人社局）<br>
+      • 小微企业贷款：最高300万创业担保贷款<br>
+      • 部分区免费刻章：注册公司可免费刻公章（具体咨询注册地市场监管局）
+    </div>`;
+  }else{
+    html += `<div class="section-title">📍 地区指引</div>
+    <div class="tip-box" style="border-left-color:#2ec4b6">
+      <strong>全国通用流程：</strong>上述流程全国基本一致，具体细节建议咨询当地市场监管局或拨打12315。<br>
+      <strong>目前仅展示北京地区详细指引</strong>，其他城市陆续补充中。
+    </div>`;
+  }
+  
+  document.getElementById('resultHeader').innerHTML = html;
+  
+  document.getElementById('step2').classList.add('hide');
+  document.getElementById('step3').classList.remove('hide');
+}
+
+function resetAll(){
+  selected = -1;
+  document.querySelectorAll('.option-card').forEach(c=>c.classList.remove('selected'));
+  document.getElementById('nextBtn').disabled = true;
+  document.getElementById('step3').classList.add('hide');
+  document.getElementById('step1').classList.remove('hide');
+}
+</script>
+</body>
+</html>
