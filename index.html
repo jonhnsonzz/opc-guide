@@ -389,7 +389,8 @@ function goStep3(){
   allExtras.forEach((e,ei)=>{
     const tagClass = e.level==='必须'?'red':e.level==='建议'?'orange':'green';
     const detail = complianceDetail[e.name];
-    html += '<div class="extra-item" style="cursor:pointer;padding:10px;margin-bottom:6px;background:#fff;border:1px solid #e8e8e8;border-radius:8px;transition:border-color .2s" onclick="toggleDetail(\'extra_\'' + ei + '\')">';
+    var onclickStr = "toggleDetail('extra_" + ei + "')";
+    html += '<div class="extra-item" style="cursor:pointer;padding:10px;margin-bottom:6px;background:#fff;border:1px solid #e8e8e8;border-radius:8px;transition:border-color .2s" onclick="' + onclickStr + '">';
     html += '<div style="display:flex;justify-content:space-between;align-items:center"><span><strong>' + e.name + '</strong> <span class="tag '+tagClass+'">' + e.level + '</span>' + (e.industryLabel ? ' <span style="font-size:11px;color:#888;background:#f0f0f0;border-radius:3px;padding:1px 5px">' + e.industryLabel + '</span>' : '') + '</span><span style="font-size:12px;color:#888">' + e.note + ' <span style="color:#4361ee;margin-left:4px">▼</span></span></div>';
     if(detail){
       html += '<div id="extra_'+ei+'" style="display:none;margin-top:10px;padding-top:10px;border-top:1px solid #e0e0e0">';
