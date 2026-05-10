@@ -1,8 +1,10 @@
 # 一人创业合规指南
 
-> One-Person Company Compliance Guide · 选身份 · 填行业 · 出清单 · 免费
+> One-Person Company Compliance Guide
 
-一个免费在线工具，帮你快速了解 **一人创业需要办什么证、走什么流程**。
+> **English:** A free online tool to help you understand what licenses and procedures you need to start your own business in China. Choose your identity (LLC / Sole Proprietor / Indie Developer), select your industry, get a compliance checklist with costs and timelines. Free, no data upload.
+
+> **中文：** 一个免费在线工具，帮你快速了解一人创业需要办什么证、走什么流程。选身份、填行业、出清单，附费用和时间预估。
 
 ## 怎么用？
 
