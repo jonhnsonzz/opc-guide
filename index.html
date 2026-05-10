@@ -21,8 +21,14 @@ h1{font-size:22px;text-align:center;margin-bottom:4px}
 .option-card .desc{font-size:12px;color:#888;line-height:1.4}
 .form-group{margin-bottom:16px}
 .form-group label{display:block;font-weight:600;font-size:14px;margin-bottom:6px;color:#333}
-.form-group select,.form-group input{width:100%;padding:10px 12px;border:2px solid #e0e0e0;border-radius:10px;font-size:14px;background:#fff}
+.form-group select,.form-group input,.form-group textarea{width:100%;padding:10px 12px;border:2px solid #e0e0e0;border-radius:10px;font-size:14px;background:#fff}
 .form-group select:focus,.form-group input:focus{outline:none;border-color:#4361ee}
+.checkbox-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.checkbox-item{display:flex;align-items:center;gap:6px;padding:8px 10px;border:2px solid #e0e0e0;border-radius:8px;cursor:pointer;transition:all .2s;font-size:13px;background:#fff}
+.checkbox-item:hover{border-color:#4361ee;background:#f8f9ff}
+.checkbox-item.checked{border-color:#4361ee;background:#eef2ff}
+.checkbox-item input[type="checkbox"]{accent-color:#4361ee;width:16px;height:16px;cursor:pointer}
+@media(max-width:480px){.checkbox-grid{grid-template-columns:1fr 1fr}}
 .btn{display:block;width:100%;padding:13px;background:#4361ee;color:#fff;border:none;border-radius:10px;font-size:16px;font-weight:600;cursor:pointer;text-align:center;transition:background .2s}
 .btn:hover{background:#3651d4}
 .btn.outline{background:transparent;color:#4361ee;border:2px solid #4361ee;margin-top:12px}
@@ -64,17 +70,17 @@ h1{font-size:22px;text-align:center;margin-bottom:4px}
 <div class="option-card" onclick="pick(0)" id="opt0">
 <div class="icon">🏢</div>
 <div class="name">一人有限责任公司</div>
-<div class="desc">独立法人、有限责任<br>适合有明确业务方向</div>
+<div class="desc">银行开户+社保公积金+记账报税+企业年度报告</div>
 </div>
 <div class="option-card" onclick="pick(1)" id="opt1">
 <div class="icon">🧑‍💼</div>
-<div class="name">个人创业者</div>
-<div class="desc">个体工商户/小规模<br>适合自由职业/小店</div>
+<div class="name">个体工商户</div>
+<div class="desc">营业执照+核定征收+社保</div>
 </div>
 <div class="option-card" onclick="pick(2)" id="opt2">
 <div class="icon">💻</div>
-<div class="name">独立开发者</div>
-<div class="desc">做网站/App/接外包<br>适合技术背景创业者</div>
+<div class="name">独立开发者/自由职业者</div>
+<div class="desc">个人所得税+劳务合同/著作权</div>
 </div>
 </div>
 <button class="btn" id="nextBtn" disabled onclick="goStep2()">选择身份后继续 →</button>
@@ -84,20 +90,38 @@ h1{font-size:22px;text-align:center;margin-bottom:4px}
 <div class="card hide" id="step2">
 <h1>📋 补充信息</h1>
 <p class="sub">让清单更精准</p>
-<div class="form-group">
-<label>你的行业/创业方向</label>
-<select id="industry">
-<option value="电商">电商/跨境电商</option>
-<option value="软件开发">软件开发/外包</option>
-<option value="咨询服务">咨询服务/培训</option>
-<option value="内容创作">内容创作/自媒体</option>
-<option value="设计创意">设计/创意服务</option>
-<option value="餐饮零售">餐饮/零售</option>
-<option value="AI应用">AI应用/工具</option>
-<option value="SaaS产品">SaaS产品/平台</option>
-<option value="其他">其他</option>
-</select>
-</div>
+    <div class="form-group">
+    <label>你的行业/创业方向 <span style="font-weight:400;color:#888;font-size:12px">（可多选）</span></label>
+    <div class="checkbox-grid" id="industryGroup">
+    <label class="checkbox-item" onclick="toggleIndustry(this)">
+    <input type="checkbox" value="电商"> 电商/跨境电商
+    </label>
+    <label class="checkbox-item" onclick="toggleIndustry(this)">
+    <input type="checkbox" value="软件开发"> 软件开发/外包
+    </label>
+    <label class="checkbox-item" onclick="toggleIndustry(this)">
+    <input type="checkbox" value="咨询服务"> 咨询服务/培训
+    </label>
+    <label class="checkbox-item" onclick="toggleIndustry(this)">
+    <input type="checkbox" value="内容创作"> 内容创作/自媒体
+    </label>
+    <label class="checkbox-item" onclick="toggleIndustry(this)">
+    <input type="checkbox" value="设计创意"> 设计/创意服务
+    </label>
+    <label class="checkbox-item" onclick="toggleIndustry(this)">
+    <input type="checkbox" value="餐饮零售"> 餐饮/零售
+    </label>
+    <label class="checkbox-item" onclick="toggleIndustry(this)">
+    <input type="checkbox" value="AI应用"> AI应用/工具
+    </label>
+    <label class="checkbox-item" onclick="toggleIndustry(this)">
+    <input type="checkbox" value="SaaS产品"> SaaS产品/平台
+    </label>
+    <label class="checkbox-item" onclick="toggleIndustry(this)">
+    <input type="checkbox" value="其他"> 其他
+    </label>
+    </div>
+    </div>
 <div class="form-group">
 <label>所在地区</label>
 <select id="city">
@@ -154,7 +178,7 @@ const identity = [
     }
   },
   {
-    name:'个人创业者', icon:'🧑‍💼',
+    name:'个体工商户', icon:'🧑‍💼',
     steps:[
       {title:'名称核准',detail:'确定个体工商户名称，到当地市场监管局核名。北京可通过"北京市企业登记e窗通"办理。',material:['备选名称','经营者身份证'],cost:'免费',time:'即时'},
       {title:'提交开业登记',detail:'提交个体工商户开业登记申请。北京支持全程网办。',material:['经营者身份证','经营场所证明（产权证或租赁合同）','经营范围'],cost:'免费',time:'1-3个工作日'},
@@ -209,6 +233,17 @@ function pick(idx){
   document.getElementById('nextBtn').disabled = false;
 }
 
+function toggleIndustry(el){
+  const cb = el.querySelector('input[type="checkbox"]');
+  cb.checked = !cb.checked;
+  el.classList.toggle('checked', cb.checked);
+}
+
+function getSelectedIndustries(){
+  const checked = document.querySelectorAll('#industryGroup input[type="checkbox"]:checked');
+  return Array.from(checked).map(cb => cb.value);
+}
+
 function goStep2(){
   if(selected<0) return;
   document.getElementById('step1').classList.add('hide');
@@ -222,15 +257,26 @@ function backStep1(){
 
 function goStep3(){
   const id = identity[selected];
-  const ind = document.getElementById('industry').value;
+  const inds = getSelectedIndustries();
   const city = document.getElementById('city').value;
   const isBj = city === '北京';
-  
+
+  // Build industry display text
+  const indLabels = [];
+  inds.forEach(v => {
+    const cb = document.querySelector(`#industryGroup input[value="${v}"]`);
+    if(cb) {
+      // Find parent label text
+      const label = cb.closest('.checkbox-item');
+      if(label) indLabels.push(label.textContent.trim());
+    }
+  });
+  const indText = indLabels.length > 0 ? indLabels.join(' + ') : '未选择';
+
   let html = `<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><span style="font-size:28px">${id.icon}</span><span style="font-size:20px;font-weight:700">${id.name}</span></div>
-  <p class="sub" style="text-align:left;margin-bottom:12px">行业：${document.getElementById('industry').selectedOptions[0].text} · 地区：${city}</p>`;
-  
+  <p class="sub" style="text-align:left;margin-bottom:12px">行业：${indText} · 地区：${city}</p>`;
+
   html += '<div class="section-title">📋 合规路径</div>';
-  let totalCost = 0, totalTime = '';
   id.steps.forEach((s,i)=>{
     const isFree = s.cost.includes('免费') || s.cost.includes('0元');
     html += `<div class="step-item">
@@ -243,19 +289,34 @@ function goStep3(){
       <div style="font-size:12px;color:#888;margin-top:4px">⏱ ${s.time}</div>
     </div>`;
   });
-  
+
   html += `<div class="tip-box" style="border-left-color:#4361ee">💡 ${id.notNeed}</div>`;
-  
-  // Industry extras
-  const extras = id.extras[ind] || id.extras['其他'];
+
+  // Industry extras - merge & deduplicate by name, track industry count
+  const extraCount = {}; // name -> { item, industries: Set }
+  (inds.length > 0 ? inds : ['其他']).forEach(ind => {
+    const list = id.extras[ind] || id.extras['其他'] || [];
+    list.forEach(e => {
+      if(!extraCount[e.name]){
+        extraCount[e.name] = { item: e, industries: new Set() };
+      }
+      extraCount[e.name].industries.add(ind);
+    });
+  });
+  const allExtras = Object.values(extraCount).map(({item, industries}) => ({
+    ...item,
+    industryCount: industries.size,
+    industryLabel: industries.size > 1 ? `适用于${industries.size}个行业` : ''
+  }));
+
   html += '<div class="section-title">📎 行业附加资质</div>';
   html += '<div class="extra-list">';
-  extras.forEach(e=>{
+  allExtras.forEach(e=>{
     const tagClass = e.level==='必须'?'red':e.level==='建议'?'orange':'green';
-    html += `<div class="extra-item"><span>${e.name} <span class="tag ${tagClass}">${e.level}</span></span><span style="font-size:12px;color:#888">${e.note}</span></div>`;
+    html += `<div class="extra-item"><span>${e.name} <span class="tag ${tagClass}">${e.level}</span>${e.industryLabel ? ` <span style="font-size:11px;color:#888;background:#f0f0f0;border-radius:3px;padding:1px 5px">${e.industryLabel}</span>` : ''}</span><span style="font-size:12px;color:#888">${e.note}</span></div>`;
   });
   html += '</div>';
-  
+
   // City detail
   if(isBj){
     html += `<div class="section-title">📍 北京地区指引</div>
@@ -276,9 +337,9 @@ function goStep3(){
       <strong>目前仅展示北京地区详细指引</strong>，其他城市陆续补充中。
     </div>`;
   }
-  
+
   document.getElementById('resultHeader').innerHTML = html;
-  
+
   document.getElementById('step2').classList.add('hide');
   document.getElementById('step3').classList.remove('hide');
 }
