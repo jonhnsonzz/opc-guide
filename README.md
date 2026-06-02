@@ -1,34 +1,38 @@
-# 一人创业合规指南
+# OPC Guide — One-Person Company Compliance Checklist
 
-> One-Person Company Compliance Guide
-
-> **English:** A free online tool to help you understand what licenses and procedures you need to start your own business in China. Choose your identity (LLC / Sole Proprietor / Indie Developer), select your industry, get a compliance checklist with costs and timelines. Free, no data upload.
+> A free online tool to help indie developers and entrepreneurs understand what licenses and procedures they need to start a business in China. Choose your identity (LLC / Sole Proprietor / Indie Developer), select your industry, get a compliance checklist with costs and timelines. Free, no data upload.
 
 > **中文：** 一个免费在线工具，帮你快速了解一人创业需要办什么证、走什么流程。选身份、填行业、出清单，附费用和时间预估。
 
-## 怎么用？
+## How to Use
 
-1. 打开 https://jonhnsonzz.github.io/opc-guide/
-2. **选身份**：一人有限责任公司 / 个人创业者 / 独立开发者
-3. **填信息**：行业方向 + 所在地区
-4. **出清单**：系统自动生成合规路径（步骤+材料+费用+时间）+ 行业附加资质
+1. Open **[https://jonhnsonzz.github.io/opc-guide/](https://jonhnsonzz.github.io/opc-guide/)**
+2. **Choose your identity**: One-Person LLC / Sole Proprietor / Indie Developer
+3. **Fill in the details**: Industry direction + region/location
+4. **Get your checklist**: The system auto-generates a compliance path (steps + documents + costs + timeline) plus industry-specific qualifications
 
-## 三种身份
+## Three Identity Types
 
-| 身份 | 适用人群 | 特点 |
-|------|---------|------|
-| 🏢 一人有限责任公司 | 有明确业务方向 | 独立法人，有限责任 |
-| 🧑‍💼 个人创业者 | 自由职业/小店 | 个体户，无限责任 |
-| 💻 独立开发者 | 做网站/App/接外包 | 技术背景创业 |
+| Identity | For Whom | Features |
+|----------|----------|----------|
+| 🏢 One-Person LLC | Those with a clear business direction | Independent legal entity, limited liability |
+| 🧑‍💼 Sole Proprietor | Freelancers / small shop owners | Individual business, unlimited liability |
+| 💻 Indie Developer | Building websites/Apps/freelancing | Tech background entrepreneurs |
 
-## 隐私说明
+## Privacy
 
-- 所有数据仅在浏览器本地计算，不上传任何服务器
-- 不收集任何个人信息
+- All data is computed locally in your browser — **nothing is uploaded to any server**
+- No personal information is collected
 
-## 技术说明
+## Technical Notes
 
-纯前端HTML单页应用，零依赖，可直接在浏览器中运行。
+Pure front-end HTML single-page application. Zero dependencies. Runs directly in any browser.
+
+---
+
+## License
+
+MIT License
 
 ---
 
